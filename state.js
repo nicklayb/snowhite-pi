@@ -1,3 +1,5 @@
+const { inverse } = require('./utils.js')
+
 let state = -1
 
 const handlers = []
@@ -12,7 +14,7 @@ const update = (value) => {
 	fireEvent()
 }
 
-const reverseState = () => state === 1 ? 0 : 1
+const reverseState = () => inverse(state)
 
 const toggle = () => update(reverseState())
 

@@ -1,6 +1,13 @@
 const Server = require('./server.js')
 const Hardware = require('./hardware.js')
+const Cli = require('./cli.js')
 
-Hardware.init()
+if (!process.argv.includes('--no-hardware')) {
+  Hardware.init()
+}
 
-Server.init()
+if (!process.argv.includes('--no-server')) {
+  Server.init()
+} else {
+  Cli.init(process.argv)
+}
