@@ -9,9 +9,9 @@ const getState = () => state
 const fireEvent = () => handlers.forEach(handler => handler(getState()))
 
 const update = (value) => {
-	console.log(`[STATE] Updating from ${getState()} to ${value}`)
-	state = value
-	fireEvent()
+  console.log(`[STATE] Updating from ${getState()} to ${value}`)
+  state = value
+  fireEvent()
 }
 
 const reverseState = () => inverse(state)
@@ -23,19 +23,19 @@ const setOn = () => update(1)
 const setOff = () => update(0)
 
 const openFor = (timeout) => {
-	setOn()
-	setTimeout(setOff, timeout)
+  setOn()
+  setTimeout(setOff, timeout)
 }
 
 const onUpdate = (handler) => handlers.push(handler)
 
 module.exports = {
-	onUpdate,
-	update,
-	getState,
-	setOn,
-	setOff,
-	reverseState,
-	toggle,
-	openFor
+  onUpdate,
+  update,
+  getState,
+  setOn,
+  setOff,
+  reverseState,
+  toggle,
+  openFor
 }

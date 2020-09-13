@@ -14,12 +14,12 @@ let running = false
 const convertValue = (value) => INVERTED ? inverse(value) : value
 
 const init = () => {
-	if (running) return;
+  if (running) return;
 
-	State.onUpdate((value) => {
-		Relay.writeSync(convertValue(value))
-		console.log(`[RELAY] Switching to ${value}`)
-	})
+  State.onUpdate((value) => {
+    Relay.writeSync(convertValue(value))
+    console.log(`[RELAY] Switching to ${value}`)
+  })
 
   if (!process.argv.includes('--no-pir')) {
     console.log(`[PIR] Watching for changes...`)
@@ -32,11 +32,11 @@ const init = () => {
       }
     })
   }
-	running = true
+  running = true
 }
 
 module.exports = {
-	init,
-	Pir,
-	Relay
+  init,
+  Pir,
+  Relay
 }
