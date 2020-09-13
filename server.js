@@ -17,10 +17,27 @@ App.get('/toggle', (req, res) => {
 	res.redirect('/')
 })
 
+App.get('/on', (req, res) => {
+  log('GET /on')
+  State.setOn()
+  res.redirect('/')
+})
+
+App.get('/off', (req, res) => {
+  log('GET /off')
+  State.setOff()
+  res.redirect('/')
+})
+
 App.get('/open_temp', (req, res) => {
 	log('GET /open_temp')
 	State.openFor(1000)
 	res.redirect('/')
+})
+
+App.get('/status', (req, res) => {
+  log('GET /status')
+  res.send(`${State.getState()}`)
 })
 
 const init = () => {
