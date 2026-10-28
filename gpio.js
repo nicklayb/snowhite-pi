@@ -2,6 +2,8 @@ const { spawn } = require('child_process')
 const readline = require('readline')
 
 const CHIP = process.env.GPIO_CHIP || 'gpiochip0'
+// Pulses shorter than this (relay switching noise) are ignored; a PIR changes state over seconds
+const DEBOUNCE_PERIOD = process.env.GPIO_DEBOUNCE_PERIOD || '100ms'
 const RISING_EDGE = '1'
 const FAILURE_EXIT_CODE = 1
 
@@ -13,13 +15,13 @@ const exitOnUnexpectedExit = (command) => (code, signal) => {
 }
 
 /**
- * Watches both edges of an input line with libgpiod's `gpiomon`
+ * Watches both edges of an input line with libgpiod's `gpiomon`, debounced,
  * and calls `onChange` with 1 (rising) or 0 (falling).
  */
 const watchInput = (line, onChange) => {
   const monitor = spawn(
     'gpiomon',
-    ['--chip', CHIP, '--edges', 'both', '--format', '%e', `${line}`],
+    ['--chip', CHIP, '--edges', 'both', '--debounce-period', DEBOUNCE_PERIOD, '--format', '%e', `${line}`],
     { stdio: ['ignore', 'pipe', 'inherit'] }
   )
   monitor.on('exit', exitOnUnexpectedExit('gpiomon'))

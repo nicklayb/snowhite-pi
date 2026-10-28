@@ -29,3 +29,8 @@ and availability to `snowhite/availability`.
 When `COLOR_SCHEME_FILE` is set, a `Color scheme` select (`light`/`dark`) is also discovered
 (`snowhite/color_scheme/state` and `snowhite/color_scheme/set`).
 Selecting an option writes it to the file, which the kiosk watches to restart its browser in that scheme.
+
+## GPIO
+
+`GPIO_CHIP` (default `gpiochip0`) selects the chip and `GPIO_DEBOUNCE_PERIOD` (default `100ms`) filters
+the PIR input against electrical noise, such as the relay switching.
